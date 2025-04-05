@@ -1,5 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// app/layout.tsx or wherever you use ThemeProvider
+import { ThemeProvider } from "@/components/ui/theme-provider";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +25,20 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="min-h-screen">{children}</main>
+            {/* footer */}
+            <footer>
+              <div>
+                <p>Made with Love and Coffee!</p>
+              </div>
+            </footer>
+          </ThemeProvider>
       </body>
     </html>
   );
